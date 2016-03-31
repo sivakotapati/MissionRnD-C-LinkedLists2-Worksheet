@@ -12,12 +12,30 @@ NOTES:
 */
 
 #include <stdio.h>
-
+#include<stdlib.h>
 struct node {
 	int num;
 	struct node *next;
 };
-
+void add_node_at_front(struct node **, int);
 struct node * reverseLinkedList(struct node *head) {
-	return NULL;
+	if (head == NULL)//checking for valid head 
+		return NULL;
+
+	struct node *rev = NULL;
+	while (head != NULL){
+		add_node_at_front(&rev, head->num);
+		head = head->next;
+	}
+	return rev;
+}
+
+void add_node_at_front(struct node **h, int k){
+	struct node *temp = (struct node *)malloc(sizeof(struct node));
+	temp->num = k;
+	temp->next = NULL;
+	
+	if (*h != NULL)
+		temp->next = *h; 
+	*h = temp;
 }
